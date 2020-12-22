@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+
+     <style>
+          #myProgress {
+               width: 100%;
+               background-color: #ddd;
+          }
+
+          #myBar {
+               width: 0%;
+               height: 30px;
+               background-color: #4CAF50;
+               text-align: center;
+               line-height: 30px;
+               color: white;
+          }
+     </style>
+
+
+
+
+
+
+
+
+
+     <script>
+          window.onload = function move() {
+               //现在本地日期
+               var date = new Date();
+               var year = date.getFullYear();
+               var month = date.getMonth() + 1;
+               var day = date.getDate();
+               var time01 = year + '-' + month + '-' + day;
+               console.log(time01);
+
+               //日期计算公式
+               var DateDiff = function (sDate1, sDate2) { // sDate1 和 sDate2 是 2016-06-18 格式
+                    var oDate1 = new Date(sDate1);
+                    var oDate2 = new Date(sDate2);
+                    var iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24); // 把相差的毫秒數轉換為天數
+                    return iDays;
+               };
+
+               //设定活动结束日期
+               var sDate3 = "2020-12-28"
+
+               //设定活动持续天数
+               var Datebff1 = "7"
+
+               //计算日期差，剩余天数
+               var GetDateDiff1 = DateDiff(time01, sDate3); // 轉換為天數 : 1
+
+               console.log(GetDateDiff1);
+
+               //总天数减去剩余天数,计算已经经过的天数
+               var Datebff3 = Datebff1 - GetDateDiff1
+               console.log(Datebff3);
+
+               //计算已经经过的天数与总天数的百分比
+               var Dateff1 = Datebff3 / Datebff1
+               var Dateff2 = (Dateff1) * 100;
+
+               //比例
+               console.log(Dateff1);
+
+               //百分比          
+               console.log(Dateff2);
+
+               //已经过天数的百分比导入进度条
+
+               var elem = document.getElementById("myBar");
+               var width = 10;
+               var id = setInterval(frame, 10);
+
+
+               function frame() {
+                    if (width >= Dateff2) {
+                         clearInterval(id);
+                    } else {
+                         width++;
+                         elem.style.width = width + '%';
+                         elem.innerHTML = width * 1 + '%';
+                    }
+               }
+          }
+     </script>
+
+</head>
+
+<body>
+     <h1>JavaScript 百分比进度条</h1>
+
+     <div id="myProgress">
+          <div id="myBar">0%</div>
+     </div>
+
+
+</body>
+
+</html>
